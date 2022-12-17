@@ -6,10 +6,10 @@ export default function App() {
   const Stack = createNativeStackNavigator();
   return (
     <NavigationContainer>
-      <Stack.Navigator>
-        {/* screens */}
-        <Stack.Screen name="Home" component={Home}/>
-      </Stack.Navigator>
-    </NavigationContainer>
+        <Stack.Navigator>
+          {/* screens */}
+          <Stack.Screen name="Home" component={Home} />
+        </Stack.Navigator>
+      </NavigationContainer>
   );
 }
