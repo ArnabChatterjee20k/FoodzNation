@@ -9,6 +9,7 @@ import {
   MagnifyingGlassIcon,
 } from "react-native-heroicons/solid";
 import Categories from "../components/Categories";
+import FeaturedRow from "../components/FeaturedRow";
 
 export default function Home() {
   const navigation = useNavigation();
@@ -16,7 +17,7 @@ export default function Home() {
     navigation.setOptions({ headerShown: false });
   }, []);
   return (
-    <View>
+    <View style={{flex:1}}>
       <View className="bg-white pt-10">
         {/* headers */}
         <View className="flex-row gap-2 items-center px-2">
@@ -52,7 +53,23 @@ export default function Home() {
       <ScrollView>
         {/* Categories */}
         <Categories />
+
         {/* Featured Rows */}
+        <FeaturedRow
+          title="Featured"
+          description="Paid placement from our partners"
+          featuredCategory="featured"
+        />
+        <FeaturedRow
+          title="Tasty Discount"
+          description="Everyone's been enjoying these juicy discounts"
+          featuredCategory="discounts"
+        />
+        <FeaturedRow
+          title="Offers near you!"
+          description="Why not support your local restaurant tonight!"
+          featuredCategory="offers"
+        />
       </ScrollView>
     </View>
   );
