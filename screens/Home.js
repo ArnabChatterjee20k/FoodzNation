@@ -49,7 +49,7 @@ export default function Home() {
       </View>
 
       {/* Body */}
-      <ScrollView className="bg-red-100">
+      <ScrollView>
         {/* Categories */}
         <Categories />
         {/* Featured Rows */}
