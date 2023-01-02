@@ -1,8 +1,10 @@
 import { Text, View, Image, TouchableOpacity } from "react-native";
 import { MapPinIcon, StarIcon } from "react-native-heroicons/solid";
 import React from "react";
+import { urlFor } from "../sanityFetcher";
 
 export default function Card({ imageUrl, header, star, category, location ,short_desp,long,dishes,lat }) {
+
   return (
     <>
       {/* card */}
@@ -10,7 +12,7 @@ export default function Card({ imageUrl, header, star, category, location ,short
         <Image
           className="h-32 w-56"
           source={{
-            uri: imageUrl,
+            uri: urlFor(imageUrl).url(),
           }}
         />
         {/* Content */}
