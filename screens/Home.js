@@ -1,6 +1,6 @@
 import { useNavigation } from "@react-navigation/native";
 
-import React, { useLayoutEffect } from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 import { Text, View, Image, TextInput, ScrollView } from "react-native";
 import {
   ChevronDoubleDownIcon,
@@ -10,14 +10,34 @@ import {
 } from "react-native-heroicons/solid";
 import Categories from "../components/Categories";
 import FeaturedRow from "../components/FeaturedRow";
+import { sanityFetcherClient } from "../sanityFetcher";
 
 export default function Home() {
+  const [featuredCategories, setFeaturedCategories] = useState();
   const navigation = useNavigation();
   useLayoutEffect(() => {
     navigation.setOptions({ headerShown: false });
   }, []);
+  useEffect(() => {
+    sanityFetcherClient
+      .fetch(
+        `
+        *[
+          _type == "featured"
+        ]{
+          ...,
+          restaurants[] ->{
+            ...,
+            dishes[]->
+          }
+        }
+    `
+      )
+      .then((data) => setFeaturedCategories(data));
+  }, []);
+
   return (
-    <View style={{flex:1}}>
+    <View style={{ flex: 1 }}>
       <View className="bg-white pt-10">
         {/* headers */}
         <View className="flex-row gap-2 items-center px-2">
@@ -55,21 +75,15 @@ export default function Home() {
         <Categories />
 
         {/* Featured Rows */}
-        <FeaturedRow
-          title="Featured"
-          description="Paid placement from our partners"
-          featuredCategory="featured"
-        />
-        <FeaturedRow
-          title="Tasty Discount"
-          description="Everyone's been enjoying these juicy discounts"
-          featuredCategory="discounts"
-        />
-        <FeaturedRow
-          title="Offers near you!"
-          description="Why not support your local restaurant tonight!"
-          featuredCategory="offers"
-        />
+        {featuredCategories?.map((category) => {
+          return (
+            <FeaturedRow
+              title={category?.name}
+              key={category?.name}
+              description={category?.short_description}
+            />
+          );
+        })}
       </ScrollView>
     </View>
   );

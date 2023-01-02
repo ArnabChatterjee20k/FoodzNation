@@ -3,7 +3,7 @@ import { FlatList, ScrollView, Text, View } from "react-native";
 import React from "react";
 import Card from "./Card";
 
-export default function FeaturedRow({ title, description, featuredCategory }) {
+export default function FeaturedRow({ title, description }) {
   return (
     <View className="flex items-start justify-center px-4 my-2 ">
       <View className="flex flex-col items-start justify-center">
