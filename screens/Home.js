@@ -79,8 +79,9 @@ export default function Home() {
           return (
             <FeaturedRow
               title={category?.name}
-              key={category?.name}
+              key={category?._id}
               description={category?.short_description}
+              id={category?._id}
             />
           );
         })}

@@ -8,7 +8,7 @@ export const sanityFetcherClient= sanityClient({
   apiVersion: '2021-08-31'
 })
 
-const builder = imageUrlBuilder(sanityClient);
+const builder = imageUrlBuilder(sanityFetcherClient);
 export function urlFor(source) {
   return builder.image(source);
 }
