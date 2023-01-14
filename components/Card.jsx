@@ -2,13 +2,39 @@ import { Text, View, Image, TouchableOpacity } from "react-native";
 import { MapPinIcon, StarIcon } from "react-native-heroicons/solid";
 import React from "react";
 import { urlFor } from "../sanityFetcher";
-
-export default function Card({ imageUrl, header, star, category, location ,short_desp,long,dishes,lat }) {
+import { useNavigation } from "@react-navigation/native";
+export default function Card({
+  imageUrl,
+  header,
+  star,
+  category,
+  location,
+  short_desp,
+  long,
+  dishes,
+  lat,
+}) {
+  const navigation = useNavigation();
 
   return (
     <>
       {/* card */}
-      <TouchableOpacity className="bg-white shadow mx-2">
+      <TouchableOpacity
+        className="bg-white shadow mx-2"
+        onPress={() =>
+          navigation.navigate("Restaurant", {
+            imageUrl,
+            header,
+            star,
+            category,
+            location,
+            short_desp,
+            long,
+            dishes,
+            lat,
+          })
+        }
+      >
         <Image
           className="h-32 w-56"
           source={{
@@ -28,7 +54,7 @@ export default function Card({ imageUrl, header, star, category, location ,short
             </View>
 
             <View className="flex-row items-center space-x-1">
-              <MapPinIcon color="green" opacity={0.5} size={15}/>
+              <MapPinIcon color="green" opacity={0.5} size={15} />
               <Text className="text-gray-400">{location}</Text>
             </View>
           </View>

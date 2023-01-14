@@ -78,7 +78,7 @@ export default function Home() {
         {featuredCategories?.map((category) => {
           return (
             <FeaturedRow
-              title={category?.name}
+              title={category?.title}
               key={category?._id}
               description={category?.short_description}
               id={category?._id}

@@ -13,6 +13,7 @@ export default function FeaturedRow({ id, title, description }) {
           ...,
               restaurants[]->{
                 ...,
+                Category->,
                 dishes[]->,
                 type->{
                   name
@@ -25,7 +26,7 @@ export default function FeaturedRow({ id, title, description }) {
       .then((data) => {
         setRestaurants(data?.restaurants);
       });
-  }, []);
+  }, [id]);
   
   return (
     <View className="flex items-start justify-center px-4 my-2 ">
@@ -45,9 +46,10 @@ export default function FeaturedRow({ id, title, description }) {
           return (
             <Card
               key={restaurant?.name}
-              header={restaurant.type?.name}
+              header={restaurant?.name}
               star={restaurant.rating}
               category={restaurant?.Category?.name}
+              dishes={restaurant?.dishes}
               location={restaurant?.address}
               short_desp={restaurant["short_description"]}
               long={restaurant?.long}
