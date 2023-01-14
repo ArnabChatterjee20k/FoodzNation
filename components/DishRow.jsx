@@ -20,7 +20,7 @@ export default function DishRow({ id, name, short_description, price, image }) {
       </View>
     </TouchableOpacity>
     {
-      isPressed && <Counter/>
+      isPressed && <Counter id={id} name={name} description={short_description} price={price} image={image}/>
     }
     </>
   );

@@ -75,11 +75,11 @@ export default function Restaurant() {
           <ArrowRightIcon color="#00CCBB" size={22} />
         </TouchableOpacity>
       </View>
-      <View>
+      <View className="mb-1">
         <Text className="font-extrabold px-4 pt-6 mb-4 text-xl">Menu</Text>
         {/* load different dish rows */}
         {dishes.map((dish) => (
-          dish && <DishRow name={dish?.name} short_description={dish?.short_description} price={dish?.price} image={dish?.image}/>
+          dish && <DishRow key={dish?._id} id={dish?._id} name={dish?.name} short_description={dish?.short_description} price={dish?.price} image={dish?.image}/>
         ))}
       </View>
     </ScrollView>
