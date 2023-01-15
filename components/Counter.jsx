@@ -2,11 +2,11 @@ import { useState } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import { MinusCircleIcon, PlusCircleIcon } from "react-native-heroicons/solid";
 import { useDispatch, useSelector } from "react-redux";
-import { addToBasket, removeFromBasket, selectBasketItems } from "../features/basketSlice";
+import { addToBasket, removeFromBasket, selectBasketItemsById } from "../features/basketSlice";
 
 export default function Counter({ id, name, description, price, image }) {
   const dispatch = useDispatch();
-   const items = useSelector((state)=>selectBasketItems(state,id))
+   const items = useSelector((state)=>selectBasketItemsById(state,id))
    const addItemToBasket = () => {
        dispatch(addToBasket({ id, name, description, price, image }));
   };
