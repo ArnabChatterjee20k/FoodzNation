@@ -15,7 +15,7 @@ export default function App() {
         <Stack.Navigator>
           {/* screens */}
           <Stack.Screen name="Home" component={Home} />
-          <Stack.Screen name="Restaurant" component={Restaurant} />
+          <Stack.Screen name="Restaurant" component={Restaurant} options={{animation:"slide_from_right"}}/>
           <Stack.Screen
             name="Basket"
             component={Basket}
