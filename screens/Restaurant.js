@@ -1,5 +1,5 @@
 import { View, Text, ScrollView, Image, TouchableOpacity } from "react-native";
-import React, { useLayoutEffect } from "react";
+import React, { useEffect, useLayoutEffect } from "react";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { urlFor } from "../sanityFetcher";
 import {
@@ -11,8 +11,12 @@ import {
 } from "react-native-heroicons/solid";
 import DishRow from "../components/DishRow";
 import BasketIcon from "../components/BasketIcon";
+import { useDispatch } from "react-redux";
+import { setRestaurant } from "../features/restaurantSlice";
 
 export default function Restaurant() {
+  const dispatch = useDispatch();
+
   const {
     params: {
       imageUrl,
@@ -27,13 +31,31 @@ export default function Restaurant() {
     },
   } = useRoute();
   const navigation = useNavigation();
+
+  useEffect(() => {
+    dispatch(
+      setRestaurant({
+        imageUrl,
+        header,
+        star,
+        category,
+        location,
+        short_desp,
+        long,
+        dishes,
+        lat,
+      })
+    );
+  },[]);
+  // if getting error just put dispatch in the dependency array
+  
   useLayoutEffect(() => {
     navigation.setOptions({ headerShown: false });
   }, []);
 
   return (
     <>
-    <BasketIcon/>
+      <BasketIcon />
       <ScrollView>
         <View className="relative">
           <Image
