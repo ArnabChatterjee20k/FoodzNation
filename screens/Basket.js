@@ -98,7 +98,7 @@ export default function Basket() {
         </View>
       </View>
       <View className="px-2 pb-4 bg-white">
-        <TouchableOpacity className="rounded-lg bg-[#00ccbb] p-4">
+        <TouchableOpacity className="rounded-lg bg-[#00ccbb] p-4" onPress={()=>navigation.navigate("PreparingOrderScreen")}>
           <Text className="text-center text-white text-lg font-bold">
             Place Order
           </Text>
