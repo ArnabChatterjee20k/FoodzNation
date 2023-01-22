@@ -8,7 +8,7 @@ export default function PreparingOrderScreen() {
     const navigation = useNavigation()
     useEffect(()=>{
         setTimeout(()=>{
-            navigation.navigate("Home")
+            navigation.navigate("Delivery")
         },4000)
     })
   return (
