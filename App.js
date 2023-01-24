@@ -4,26 +4,20 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Home from "./screens/Home";
 import Restaurant from "./screens/Restaurant";
 import { store } from "./store";
-import { Provider } from "react-redux";
+import { Provider, useDispatch, useSelector } from "react-redux";
 import Basket from "./screens/Basket";
 import PreparingOrderScreen from "./screens/PreparingOrderScreen";
+import Delivery from "./screens/Delivery";
+import ScreenNavigator from "./ScreenNavigator";
+import { getToken, setToken } from "./utils/utils";
+import { getIsLoggedIn } from "./features/authSlice";
 
 export default function App() {
   const Stack = createNativeStackNavigator();
   return (
     <NavigationContainer>
       <Provider store={store}>
-        <Stack.Navigator>
-          {/* screens */}
-          <Stack.Screen name="Home" component={Home} />
-          <Stack.Screen name="Restaurant" component={Restaurant} options={{animation:"slide_from_right"}}/>
-          <Stack.Screen
-            name="Basket"
-            component={Basket}
-            options={{ headerShown: true ,animation:"slide_from_bottom"}}
-          />
-          <Stack.Screen name="PreparingOrderScreen" component={PreparingOrderScreen} options={{headerShown:false}}/>
-        </Stack.Navigator>
+          <ScreenNavigator/>
       </Provider>
     </NavigationContainer>
   );
