@@ -1,7 +1,7 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const storageKey = "@DELIVAROO_TOKEN";
-const url = "http://192.168.43.175:3000";
+const url = "http://192.168.0.138:3000";
 export const setToken = async (token) => {
   try {
     await AsyncStorage.setItem(storageKey, token);
@@ -22,6 +22,7 @@ export const getToken = async () => {
 export const removeToken = async () => {
   const token = await AsyncStorage.removeItem(storageKey);
   console.log({ token });
+  return "Success"
 };
 
 export const fetchOrders = async () => {
@@ -61,7 +62,7 @@ export const loginUser = async ({ email, password }) => {
 };
 
 export const handleFetchError = (errorCode) => {
-  switch (errorCode) {
+  switch (Number.parseInt(errorCode)) {
     case 403:
       return "Bad Authentication"
       break;

@@ -1,7 +1,8 @@
 import { useNavigation } from "@react-navigation/native";
 
 import React, { useEffect, useLayoutEffect, useState } from "react";
-import { Text, View, Image, TextInput, ScrollView } from "react-native";
+import { Text, View, Image, TextInput, ScrollView, TouchableOpacity } from "react-native";
+
 import {
   ChevronDoubleDownIcon,
   UserIcon,
@@ -56,7 +57,9 @@ export default function Home() {
               <ChevronDoubleDownIcon size={20} color="#00CCBB" />
             </Text>
           </View>
-          <UserIcon size={35} color="#00CCBB" />
+          <TouchableOpacity onPress={()=>navigation.navigate("User")} className="rounded-full  bg-[#dcfffd] p-1 valid:shadow-lg valid:border-1 border-black">
+            <UserIcon size={35} color="#00CCBB"/>
+          </TouchableOpacity>
         </View>
 
         {/* search */}

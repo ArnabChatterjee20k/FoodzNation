@@ -6,6 +6,7 @@ import Basket from "../screens/Basket";
 import PreparingOrderScreen from "../screens/PreparingOrderScreen";
 import Delivery from "../screens/Delivery";
 import Restaurant from "../screens/Restaurant";
+import User from "../screens/User";
 
 export default function UserNav() {
   const Stack = createNativeStackNavigator();
@@ -14,6 +15,7 @@ export default function UserNav() {
       <Stack.Navigator>
         {/* screens */}
         <Stack.Screen name="Home" component={Home} />
+        <Stack.Screen name="User" component={User} />
         <Stack.Screen
           name="Restaurant"
           component={Restaurant}
