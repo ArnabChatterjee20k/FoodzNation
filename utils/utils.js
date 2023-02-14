@@ -6,22 +6,18 @@ export const setToken = async (token) => {
   try {
     await AsyncStorage.setItem(storageKey, token);
   } catch (e) {
-    console.log("Some problem occured while saving token");
-    console.log(e);
+  console.log("🚀 ~ file: utils.js:9 ~ setToken ~ e", e)
   }
 };
 export const getToken = async () => {
-  try {
     const token = await AsyncStorage.getItem(storageKey);
     return token;
-  } catch (error) {
-    console.log("Some problem occured while getting token");
-    console.log(e);
   }
-};
+
 export const removeToken = async () => {
   const token = await AsyncStorage.removeItem(storageKey);
-  console.log({ token });
+  console.log("🚀 ~ file: utils.js:19 ~ removeToken ~ token", token)
+  
   return "Success"
 };
 
@@ -36,16 +32,21 @@ export const fetchOrders = async () => {
   return data;
 };
 
-export const createUser = async ({ body }) => {
+export const createUser = async ( body ) => {
   const token = await getToken();
   const req = await fetch(`${url}/user`, {
     method: "POST",
     body: JSON.stringify(body),
     headers: {
       token: token,
+      'Content-type':'application/json'
     },
   });
   const data = await req.json();
+  if(!req.ok){
+    throw new Error(req.status)
+  }
+  await setToken(data)
   return data;
 };
 
@@ -58,6 +59,7 @@ export const loginUser = async ({ email, password }) => {
     throw new Error(res.status);
   }
   const { token } = await res.json();
+  await setToken(token)
   return token;
 };
 

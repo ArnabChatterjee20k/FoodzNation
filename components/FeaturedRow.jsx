@@ -27,9 +27,9 @@ export default function FeaturedRow({ id, title, description }) {
         setRestaurants(data?.restaurants);
       });
   }, [id]);
-  
+   
   return (
-    <View className="flex items-start justify-center px-4 my-2 ">
+    <View className="flex items-start justify-center px-4 my-2 flex-1">
       <View className="flex flex-col items-start justify-center">
         <Text className="font-bold text-lg">{title}</Text>
         <Text className="text-gray-400">{description}</Text>

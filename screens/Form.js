@@ -5,7 +5,7 @@ import { getInfo, setEmail, setPassword } from "../features/inputSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 
-export default function Form({ params , action}) {
+export default function Form({ params , action , actionName}) {
   return (
     <View className="p-4 space-y-4">
       {params.map(({ name, value, setter, placeholder },index) => {
@@ -23,7 +23,7 @@ export default function Form({ params , action}) {
         onPress={action}
         className="flex-row justify-center bg-[#00ccbb] py-2 px-4 rounded"
       >
-        <Text className="text-white text-lg font-bold">Login</Text>
+        <Text className="text-white text-lg font-bold">{actionName}</Text>
       </TouchableOpacity>
     </View>
   );

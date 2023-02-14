@@ -2,7 +2,7 @@ import { View, Text } from "react-native";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { getIsLoggedIn, setSignIn } from "./features/authSlice";
+import { getIsLoggedIn, isTokenExists, setSignIn } from "./features/authSlice";
 import { getToken, removeToken } from "./utils/utils";
 import { useNavigation } from "@react-navigation/native";
 import { useCallback } from "react";
@@ -16,19 +16,25 @@ import PreparingOrderScreen from "./screens/PreparingOrderScreen";
 import Delivery from "./screens/Delivery";
 import Restaurant from "./screens/Restaurant";
 import User from "./screens/User";
+import Register from "./screens/Register";
 
 export default function ScreenNavigator() {
   const dispatch = useDispatch();
-  const setLogIn = useCallback(async () => {
-    const token = await getToken();
-    if (token) {
-      dispatch(setSignIn({ token, isLoggedIn: token && true }));
-    }
-  }, []);
-  setLogIn();
 
-  const isLoggedIn = useSelector(getIsLoggedIn,);
-  const data= useSelector(state=>state.auth)
+  useEffect(() => {
+    async function setLogin() {
+      try {
+        await dispatch(isTokenExists()).unwrap();
+      } catch (error) {
+        console.log("🚀 ~ file: ScreenNavigator.js:29 ~ setLogin ~ error", error)
+      }
+    }
+
+    setLogin();
+  }, []);
+
+  const isLoggedIn = useSelector(getIsLoggedIn);
+  const data = useSelector((state) => state.auth);
   const Stack = createNativeStackNavigator();
   return (
     <Stack.Navigator>
@@ -60,7 +66,16 @@ export default function ScreenNavigator() {
         </>
       ) : (
         <>
-          <Stack.Screen name="Login" component={Login}/>
+          <Stack.Screen
+            name="Login"
+            component={Login}
+            options={{ animation: "slide_from_left" }}
+          />
+          <Stack.Screen
+            name="Register"
+            component={Register}
+            options={{ animation: "slide_from_right" }}
+          />
         </>
       )}
     </Stack.Navigator>

@@ -1,9 +1,13 @@
+import { useNavigation } from "@react-navigation/native";
 import React from "react";
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchToken, setSignIn } from "../features/authSlice";
-import { getInfo } from "../features/inputSlice";
-import { handleFetchError, loginUser, setToken } from "../utils/utils";
+import { TouchableOpacity, Text } from "react-native";
+import { View } from "react-native-animatable";
+import { useDispatch } from "react-redux";
+import OptionalText from "../components/OptionalText";
+import { fetchToken } from "../features/authSlice";
+
+import { handleFetchError } from "../utils/utils";
 
 import Form from "./Form";
 
@@ -12,6 +16,11 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const userInfo = { email, password };
+  const nav = useNavigation();
+
+  const moveToRegisterScreen = () => {
+    nav.navigate("Register");
+  };
   const formOptions = [
     {
       name: "email",
@@ -33,13 +42,16 @@ export default function Login() {
   const getUser = async () => {
     try {
       const info = await dispatch(fetchToken(userInfo)).unwrap(); // returns a promise
+      console.log("🚀 ~ file: Login.js:45 ~ getUser ~ info", info)
     } catch (error) {
+      console.log("🚀 ~ file: Login.js:47 ~ getUser ~ error", error)
       alert(handleFetchError(error.message));
     }
   };
   return (
     <>
-      <Form params={formOptions} action={getUser} />
+      <Form params={formOptions} action={getUser} actionName="Login"/>
+      <OptionalText actionText="Not Registered?" linkText="Sign Up" action={moveToRegisterScreen}/>
     </>
   );
 }
