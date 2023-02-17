@@ -34,7 +34,7 @@ export default function Home() {
         }
     `
       )
-      .then((data) => setFeaturedCategories(data));
+      .then((data) => setFeaturedCategories(data)).catch(err=>console.log(err));
   }, []);
 
   return (

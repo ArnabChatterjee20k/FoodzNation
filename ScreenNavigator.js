@@ -17,6 +17,7 @@ import Delivery from "./screens/Delivery";
 import Restaurant from "./screens/Restaurant";
 import User from "./screens/User";
 import Register from "./screens/Register";
+import Orders from "./screens/Orders";
 
 export default function ScreenNavigator() {
   const dispatch = useDispatch();
@@ -63,6 +64,7 @@ export default function ScreenNavigator() {
             options={{ headerShown: false }}
           />
           <Stack.Screen name="Delivery" component={Delivery} />
+          <Stack.Screen name="Orders" component={Orders} options={{animation:"fade_from_bottom"}}/>
         </>
       ) : (
         <>

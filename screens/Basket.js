@@ -38,6 +38,24 @@ export default function Basket() {
     setGroupedItemBasket(groupedItems);
   }, [items]);
 
+  const prepareOrder = () => {
+    const orderList = [];
+    Object.entries(groupedItemBasket).map(([key, item]) => {
+      orderList.push({
+        image: item[0].image,
+        name: item[0].name,
+        restaurant: { type: String, required: true },
+        count: item.length,
+        restaurant: item[0].restaurant,
+      });
+    });
+    return orderList
+  };
+
+  const placeOrder = () => {
+    const orderList = prepareOrder();
+    navigation.navigate("PreparingOrderScreen",orderList)
+  };
   return (
     <>
       <View className="flex-row items-center p-4 bg-white my-4 shadow-lg">
@@ -98,7 +116,10 @@ export default function Basket() {
         </View>
       </View>
       <View className="px-2 pb-4 bg-white">
-        <TouchableOpacity className="rounded-lg bg-[#00ccbb] p-4" onPress={()=>navigation.navigate("PreparingOrderScreen")}>
+        <TouchableOpacity
+          className="rounded-lg bg-[#00ccbb] p-4"
+          onPress={placeOrder}
+        >
           <Text className="text-center text-white text-lg font-bold">
             Place Order
           </Text>

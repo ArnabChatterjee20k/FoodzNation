@@ -1,7 +1,7 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const storageKey = "@DELIVAROO_TOKEN";
-const url = "http://192.168.0.138:3000";
+const url = "http://192.168.43.175:3000";
 export const setToken = async (token) => {
   try {
     await AsyncStorage.setItem(storageKey, token);
@@ -62,6 +62,47 @@ export const loginUser = async ({ email, password }) => {
   await setToken(token)
   return token;
 };
+
+export const getOrders = async()=>{
+  const endpoint = new URL(`${url}/order`)
+  const token = await getToken()
+  let headersList = {
+    "token": token
+   }
+   
+   let res = await fetch(endpoint, { 
+     method: "GET",
+     headers: headersList
+   });
+  
+   if(!res.ok){
+    throw new Error(res.status)
+   }
+   let data = await res.json();
+   return data
+}
+
+export const createOrders = async(body)=>{
+  const endpoint = new URL(`${url}/order`)
+  const token = await getToken()
+  let headersList = {
+    "token": token,
+    'Content-type':'application/json'
+   }
+   
+   let res = await fetch(endpoint, { 
+     method: "POST",
+     headers: headersList,
+     body:JSON.stringify(body)
+   });
+  
+   if(!res.ok){
+    throw new Error(res.status)
+   }
+   let data = await res.json();
+   return data?.status
+
+}
 
 export const handleFetchError = (errorCode) => {
   switch (Number.parseInt(errorCode)) {

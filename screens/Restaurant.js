@@ -46,9 +46,9 @@ export default function Restaurant() {
         lat,
       })
     );
-  },[]);
+  }, []);
   // if getting error just put dispatch in the dependency array
-  
+
   useLayoutEffect(() => {
     navigation.setOptions({ headerShown: false });
   }, []);
@@ -106,6 +106,7 @@ export default function Restaurant() {
             (dish) =>
               dish && (
                 <DishRow
+                  restaurant={header}
                   key={dish?._id}
                   id={dish?._id}
                   name={dish?.name}
