@@ -1,4 +1,4 @@
-import { View, Text } from "react-native";
+import { Image , View} from "react-native";
 import React from "react";
 import Form from "./Form";
 import { useDispatch } from "react-redux";
@@ -7,6 +7,7 @@ import { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import OptionalText from "../components/OptionalText";
 import { addUser } from "../features/authSlice";
+import LoginBg from "../assets/AuthLogo.png"
 
 const Register = () => {
   const dispatch = useDispatch();
@@ -56,14 +57,18 @@ const Register = () => {
     }
   };
   return (
-    <>
+    <View className="py-6">
+    <Image
+          source={LoginBg}
+          className="w-56 h-56 self-center"
+        />
       <Form params={formOptions} action={createUser} actionName="Register" />
       <OptionalText
         actionText="Already Have an Account?"
         linkText="Sign In"
         action={moveToLoginScreen}
       />
-    </>
+    </View>
   );
 };
 
