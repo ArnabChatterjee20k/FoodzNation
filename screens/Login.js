@@ -1,7 +1,7 @@
 import { useNavigation } from "@react-navigation/native";
 import React from "react";
 import { useState } from "react";
-import { TouchableOpacity, Text } from "react-native";
+import { Image } from "react-native";
 import { View } from "react-native-animatable";
 import { useDispatch } from "react-redux";
 import OptionalText from "../components/OptionalText";
@@ -10,6 +10,8 @@ import { fetchToken } from "../features/authSlice";
 import { handleFetchError } from "../utils/utils";
 
 import Form from "./Form";
+
+import LoginBg from "../assets/AuthLogo.png"
 
 export default function Login() {
   const dispatch = useDispatch();
@@ -42,16 +44,24 @@ export default function Login() {
   const getUser = async () => {
     try {
       const info = await dispatch(fetchToken(userInfo)).unwrap(); // returns a promise
-      console.log("🚀 ~ file: Login.js:45 ~ getUser ~ info", info)
+      console.log("🚀 ~ file: Login.js:45 ~ getUser ~ info", info);
     } catch (error) {
-      console.log("🚀 ~ file: Login.js:47 ~ getUser ~ error", error)
+      console.log("🚀 ~ file: Login.js:47 ~ getUser ~ error", error);
       alert(handleFetchError(error.message));
     }
   };
   return (
-    <>
-      <Form params={formOptions} action={getUser} actionName="Login"/>
-      <OptionalText actionText="Not Registered?" linkText="Sign Up" action={moveToRegisterScreen}/>
-    </>
+    <View className="py-6">
+      <Image
+          source={LoginBg}
+          className="w-56 h-56 self-center"
+        />
+      <Form params={formOptions} action={getUser} actionName="Login" />
+      <OptionalText
+        actionText="Not Registered?"
+        linkText="Sign Up"
+        action={moveToRegisterScreen}
+      />
+    </View>
   );
 }
