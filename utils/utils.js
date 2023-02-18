@@ -1,7 +1,7 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const storageKey = "@DELIVAROO_TOKEN";
-const url = "http://192.168.43.175:3000";
+const url = "http://192.168.0.138:3000";
 export const setToken = async (token) => {
   try {
     await AsyncStorage.setItem(storageKey, token);
