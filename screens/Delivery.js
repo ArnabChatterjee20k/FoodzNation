@@ -67,6 +67,20 @@ export default function Delivery() {
           pinColor="#00ccbb"
         ></Marker>
       </MapView>
+
+      <View className="bg-white flex-row items-center space-x-5 h-24">
+        <Image
+          className="h-12 w-12 -scale-x-100 ml-5 bg-white p-4"
+          source={{
+            uri: "https://cdn-icons-png.flaticon.com/512/3128/3128849.png",
+          }}
+        />
+        <View className="flex-1">
+          <Text className="text-lg font-semibold">Arnab Chatterjee</Text>
+          <Text className="text-gray-400">Your Rider</Text>
+        </View>
+        <Text className="text-[#00ccbb] text-lg mr-5 font-bold">Call </Text>
+      </View>
     </View>
   );
 }
