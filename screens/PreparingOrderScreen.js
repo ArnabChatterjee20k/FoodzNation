@@ -8,19 +8,19 @@ import Prepare from "../assets/Prepare.gif"
 export default function PreparingOrderScreen() {
   const navigation = useNavigation();
   const { params } = useRoute();
-  // useEffect(() => {
-  //   createOrders(params).then(data=>{
+  useEffect(() => {
+    createOrders(params).then(data=>{
         navigation.navigate("Delivery")
-  //   })
-  //   .catch(err=>{
-  //       alert(handleFetchError(err))
-  //       navigation.goBack();
-  //   })
-  //   // setTimeout(() => {
-  //   //   navigation.navigate("Delivery")
-  //   //   navigation.goBack();
-  //   // }, 4000);
-  // });
+    })
+    .catch(err=>{
+        alert(handleFetchError(err))
+        navigation.goBack();
+    })
+    // setTimeout(() => {
+    //   navigation.navigate("Delivery")
+    //   navigation.goBack();
+    // }, 4000);
+  });
   return (
     <View className="bg-white flex-1 justify-center items-center gap-3">
       <Animatable.Image
